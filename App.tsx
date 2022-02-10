@@ -1,13 +1,14 @@
 import React from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
 import styled from 'styled-components';
-import {Dimensions, View, Text} from 'react-native';
+import {Dimensions, View, Text, SafeAreaView} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHorse} from '@fortawesome/free-solid-svg-icons';
 import {NativeRouter, Route, Routes} from 'react-router-native';
 
 import StepInfo from './components/StepsInfo';
 import Welcome from './components/Welcome';
+import {useSelector} from 'react-redux';
+import {getUserName} from './selectors/userSelectors';
 
 const LogoHeader = styled(Text)`
   color: red;
@@ -34,19 +35,27 @@ const Container = styled(View)`
   font-family: 'Roboto';
 `;
 
+const UserStatus = styled(Text)`
+  font-size: 11px;
+  text-align: right;
+  margin-right: 10px;
+`;
+
 export default function App() {
+  const userName = useSelector(getUserName);
   return (
     <NativeRouter>
-      <SafeAreaProvider>
+      <SafeAreaView>
+        <UserStatus>Logged in as {userName}</UserStatus>
         <LogoHeader>Steppe®</LogoHeader>
         <Logo icon={faHorse} size={64} />
-        <Container>
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="steps" element={<StepInfo />} />
-          </Routes>
-        </Container>
-      </SafeAreaProvider>
+      </SafeAreaView>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="steps" element={<StepInfo />} />
+        </Routes>
+      </Container>
     </NativeRouter>
   );
 }
