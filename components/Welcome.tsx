@@ -15,6 +15,9 @@ const Welcome = () => {
       <Link to="/steps">
         <S.Link>See your steps</S.Link>
       </Link>
+      <Link to="/weater">
+        <S.Link>See weater</S.Link>
+      </Link>
     </>
   );
 };

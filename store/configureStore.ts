@@ -3,9 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import countReducer from '../reducers/counterReducer';
 import userReducer from '../reducers/userReducer';
+import weaterReducer from '../reducers/weaterEducer';
 import {rootSaga} from '../sagas/rootSaga';
 
-const rootReducer = combineReducers({steps: countReducer, user: userReducer});
+const rootReducer = combineReducers({
+  steps: countReducer,
+  user: userReducer,
+  weater: weaterReducer,
+});
 const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {

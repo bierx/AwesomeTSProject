@@ -6,9 +6,7 @@ import {_select} from './helpers';
 
 export function* count() {
   const steps = yield* _select(getCurrentSteps);
-  console.log('get currenst steps in sagas', steps);
-  const effect: object = yield put(changeCountSuccess(steps + 1));
-  console.log('site effect from saga', effect);
+  yield put(changeCountSuccess(steps + 1));
 }
 
 function* stepsSaga() {
