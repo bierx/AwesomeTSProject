@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {getWeaterData} from '../selectors/weaterSelector';
+import {getWeaterData} from '../core/selectors/weaterSelector';
 import {useSelector} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -67,29 +67,29 @@ const WeatherDescription = () => {
       <WeatherDetailsRow>
         <FontAwesomeIcon icon={faTemperatureLow} size={24} />
         <WeatherDetailsItems>
-          <Text>Feels like :</Text>
-          <TextSecondary>{feels_like} °</TextSecondary>
+          <Text>Feels like:</Text>
+          <TextSecondary testID="feelsLike">{feels_like} °</TextSecondary>
         </WeatherDetailsItems>
       </WeatherDetailsRow>
       <WeatherDetailsRow>
         <FontAwesomeIcon icon={faHandHoldingWater} size={24} />
         <WeatherDetailsItems>
-          <Text>Humidity :</Text>
-          <TextSecondary>{humidity} %</TextSecondary>
+          <Text>Humidity:</Text>
+          <TextSecondary testID="humidity">{humidity} %</TextSecondary>
         </WeatherDetailsItems>
       </WeatherDetailsRow>
       <WeatherDetailsRow>
         <FontAwesomeIcon icon={faTachometerAlt} size={24} />
         <WeatherDetailsItems>
-          <Text>Pressure :</Text>
-          <TextSecondary>{pressure} hPa</TextSecondary>
+          <Text>Pressure:</Text>
+          <TextSecondary testID="pressure">{pressure} hPa</TextSecondary>
         </WeatherDetailsItems>
       </WeatherDetailsRow>
       <WeatherDetailsRow>
         <FontAwesomeIcon icon={faWind} size={24} />
         <WeatherDetailsItems>
-          <Text>Wind Speed :</Text>
-          <TextSecondary>{windSpeed}</TextSecondary>
+          <Text>Wind Speed:</Text>
+          <TextSecondary testID="windSpeed">{windSpeed}</TextSecondary>
         </WeatherDetailsItems>
       </WeatherDetailsRow>
     </WeatherDetails>

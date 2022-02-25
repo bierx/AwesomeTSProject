@@ -2,7 +2,7 @@ import {
   stepsActionsTypes,
   userActionsTypes,
   weaterActionsTypes,
-} from '../actionTypes';
+} from '../core/actionTypes';
 
 export interface StepsStatePayload {
   count: number;

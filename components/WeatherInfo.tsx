@@ -1,9 +1,13 @@
-import React from 'react';
-import {Text, Image, View} from 'react-native';
+import React, {FC} from 'react';
+import {Text, Image, View, ImageBackground} from 'react-native';
 import styled from 'styled-components';
-import {getWeaterData} from '../selectors/weaterSelector';
+import {getWeaterData} from '../core/selectors/weaterSelector';
 import {useSelector} from 'react-redux';
 import WeatherDescriptions from './WeatherDescription';
+
+interface CurrentWeatherProps {
+  error?: string;
+}
 
 const WeatherInfo = styled(View)`
   align-items: center;
@@ -31,8 +35,16 @@ const WeatherDescription = styled(Text)`
   text-transform: capitalize;
 `;
 
-const CurrentWeather = () => {
+const image = {
+  uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVrLx0KdkVsDh0fZXikqarGr7lIRXI4ggxYZzg5wt4gW0xlIvt5g98o9GUBq-WvsP66LY&usqp=CAU',
+};
+
+const CurrentWeather: FC<CurrentWeatherProps> = ({error}) => {
   const currentWeatherDetails = useSelector(getWeaterData);
+
+  if (error) {
+    return <Text>Please Allow Geolocalization</Text>;
+  }
 
   if (!currentWeatherDetails) {
     return null;
@@ -48,16 +60,18 @@ const CurrentWeather = () => {
   const iconUrl = `https://openweathermap.org/img/wn/${icon}@4x.png`;
 
   return (
-    <>
+    <ImageBackground source={image} resizeMode="cover">
       <WeatherInfo>
-        <Text>{name}</Text>
-        <WeatherIcon source={{uri: iconUrl}} />
-        <TextPrimary>{temp}°</TextPrimary>
-        <WeatherDescription>{description}</WeatherDescription>
-        <TextSecondary>{main}</TextSecondary>
+        <Text testID="location">{name}</Text>
+        <WeatherIcon testID="weatherIcon" source={{uri: iconUrl}} />
+        <TextPrimary testID="weatherTemp">{temp}°</TextPrimary>
+        <WeatherDescription testID="weatherDesc">
+          {description}
+        </WeatherDescription>
+        <TextSecondary testID="weatherMain">{main}</TextSecondary>
       </WeatherInfo>
       <WeatherDescriptions />
-    </>
+    </ImageBackground>
   );
 };
 

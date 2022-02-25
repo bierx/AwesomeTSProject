@@ -1,14 +1,11 @@
-import React, {useCallback} from 'react';
-import {useEffect} from 'react';
+import React from 'react';
 import {Text} from 'react-native';
-import RNShake from 'react-native-shake';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faShoePrints} from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {changeCountInit} from '../actions/counts';
-import {getCurrentSteps} from '../selectors/stepsSelector';
+import {useSelector} from 'react-redux';
+import {getCurrentSteps} from '../core/selectors/stepsSelector';
 
 import * as S from '../styles/global';
 
@@ -29,29 +26,14 @@ const Steps = styled(Text)`
 
 const StepsIfo = () => {
   const steps = useSelector(getCurrentSteps);
-  const dispatch = useDispatch();
-
-  const handleShake = useCallback(() => {
-    return dispatch(changeCountInit());
-  }, [dispatch]);
-
-  useEffect(() => {
-    const subscription = RNShake.addListener(() => {
-      handleShake();
-    });
-    return () => {
-      subscription.remove();
-    };
-  }, [handleShake]);
-
   return (
     <>
       <Link to="/">
         <S.Link>Back to home</S.Link>
       </Link>
-      <S.Header>Your today's steps</S.Header>
+      <S.Header>Your current steps</S.Header>
       <FontAwesomeIcon icon={faShoePrints} size={64} />
-      <Steps>{steps}</Steps>
+      <Steps testID="steps">{steps}</Steps>
     </>
   );
 };

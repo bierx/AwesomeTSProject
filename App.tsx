@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
+import RNShake from 'react-native-shake';
 import styled from 'styled-components';
-import {Dimensions, View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView} from 'react-native';
+import InternetConnectionAlert from 'react-native-internet-connection-alert';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHorse} from '@fortawesome/free-solid-svg-icons';
 import {NativeRouter, Route, Routes} from 'react-router-native';
@@ -8,8 +10,10 @@ import {NativeRouter, Route, Routes} from 'react-router-native';
 import StepInfo from './components/StepsInfo';
 import WeaterInfo from './components/Weater';
 import Welcome from './components/Welcome';
-import {useSelector} from 'react-redux';
-import {getUserName} from './selectors/userSelectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserName} from './core/selectors/userSelectors';
+import {getCurrentSteps} from './core/selectors/stepsSelector';
+import {changeCountInit} from './core/actions/counts';
 
 const LogoHeader = styled(Text)`
   color: red;
@@ -41,20 +45,49 @@ const UserStatus = styled(Text)`
 
 export default function App() {
   const userName = useSelector(getUserName);
+  const steps = useSelector(getCurrentSteps);
+
+  const dispatch = useDispatch();
+
+  const handleShake = useCallback(() => {
+    return dispatch(changeCountInit());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const subscription = RNShake.addListener(() => {
+      handleShake();
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, [handleShake]);
+
   return (
-    <NativeRouter>
-      <SafeAreaView>
-        <UserStatus>Logged in as {userName}</UserStatus>
-        <LogoHeader>Steppe®</LogoHeader>
-        <Logo icon={faHorse} size={64} />
-      </SafeAreaView>
-      <Container>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="steps" element={<StepInfo />} />
-          <Route path="weater" element={<WeaterInfo />} />
-        </Routes>
-      </Container>
-    </NativeRouter>
+    <InternetConnectionAlert
+      onChange={connectionState => {
+        console.log('Connection State: ', connectionState);
+      }}>
+      <NativeRouter>
+        <SafeAreaView>
+          <UserStatus testID="userName">Logged in as {userName}</UserStatus>
+          {steps > 5 && (
+            <View>
+              <UserStatus>
+                Your have earned one badge from {steps} steps
+              </UserStatus>
+            </View>
+          )}
+          <LogoHeader testID="logoHeader">Stepper</LogoHeader>
+          <Logo icon={faHorse} size={64} />
+        </SafeAreaView>
+        <Container>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="steps" element={<StepInfo />} />
+            <Route path="weater" element={<WeaterInfo />} />
+          </Routes>
+        </Container>
+      </NativeRouter>
+    </InternetConnectionAlert>
   );
 }

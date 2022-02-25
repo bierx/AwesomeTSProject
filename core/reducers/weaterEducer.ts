@@ -1,5 +1,5 @@
 import {weaterActionsTypes} from '../actionTypes';
-import {WeaterActions, WeaterStatePayload} from '../types/types';
+import {WeaterActions, WeaterStatePayload} from '../../types/types';
 
 const initialState: WeaterStatePayload = {
   data: null,

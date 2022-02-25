@@ -3,10 +3,15 @@ import {put, takeLatest, all, call} from 'typed-redux-saga';
 import {weaterActionsTypes} from '../actionTypes';
 import {setWeater, setWeaterError} from '../actions/weater';
 import * as API from '../api/weater';
+import {GeolocationData} from '../../hooks/useGeolocation';
 
-export function* getWeater() {
+interface GetWeaterProps {
+  payload: GeolocationData;
+}
+
+export function* getWeater({payload}: GetWeaterProps) {
   try {
-    const [result, error] = yield* call(API.getWeater);
+    const [result, error] = yield* call(API.getWeater, payload);
 
     if (result) {
       yield put(setWeater(result.data));

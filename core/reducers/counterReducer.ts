@@ -1,5 +1,5 @@
 import {stepsActionsTypes} from '../actionTypes';
-import {CountActions, StepsStatePayload} from '../types/types';
+import {CountActions, StepsStatePayload} from '../../types/types';
 
 const initialState: StepsStatePayload = {
   count: 0,

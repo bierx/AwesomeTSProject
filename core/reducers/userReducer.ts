@@ -1,5 +1,5 @@
 import {userActionsTypes} from '../actionTypes';
-import {UserActions, UserStatePayload} from '../types/types';
+import {UserActions, UserStatePayload} from '../../types/types';
 
 const initialState: UserStatePayload = {
   name: 'Lukasz',
