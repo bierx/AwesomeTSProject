@@ -7,19 +7,19 @@ COPY . ./
 
 RUN npm ci
 
-FROM dependencies as builder
-WORKDIR /app
+# FROM dependencies as builder
+# WORKDIR /app
 
-COPY . ./
+# COPY . ./
 
-RUN npm run build:prod
+# RUN npm run ios
 
 
 FROM node:12
 WORKDIR /app
 
-COPY --from=builder /app/. ./
+COPY --from=dependencies /app/. ./
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run", "e2e:ci"]
+ENTRYPOINT ["npm", "run", "start"]
