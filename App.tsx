@@ -3,32 +3,15 @@ import RNShake from 'react-native-shake';
 import styled from 'styled-components';
 import {View, Text, SafeAreaView} from 'react-native';
 import InternetConnectionAlert from 'react-native-internet-connection-alert';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faHorse} from '@fortawesome/free-solid-svg-icons';
 import {NativeRouter, Route, Routes} from 'react-router-native';
 
-import StepInfo from './components/StepsInfo';
-import WeaterInfo from './components/Weater';
+import Rewards from './components/Rewards';
+import WeaterInfo from './components/Weather';
 import Welcome from './components/Welcome';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserName} from './core/selectors/userSelectors';
 import {getCurrentSteps} from './core/selectors/stepsSelector';
 import {changeCountInit} from './core/actions/counts';
-
-const LogoHeader = styled(Text)`
-  color: red;
-  padding-left: 15px;
-  text-transform: uppercase;
-  font-size: 13px;
-  text-align: center;
-`;
-
-const Logo = styled(FontAwesomeIcon)`
-  color: red;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 30px;
-`;
 
 const Container = styled(View)`
   flex: 1;
@@ -77,13 +60,11 @@ export default function App() {
               </UserStatus>
             </View>
           )}
-          <LogoHeader testID="logoHeader">Stepper</LogoHeader>
-          <Logo icon={faHorse} size={64} />
         </SafeAreaView>
         <Container>
           <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="steps" element={<StepInfo />} />
+            <Route path="rewards" element={<Rewards />} />
             <Route path="weater" element={<WeaterInfo />} />
           </Routes>
         </Container>

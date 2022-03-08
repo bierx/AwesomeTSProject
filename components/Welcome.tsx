@@ -1,22 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-native';
-import {useSelector} from 'react-redux';
 
-import {getUserName} from '../core/selectors/userSelectors';
+import Weather from './Weather';
+import StepsIfo from './StepsInfo';
+import {useDate} from '../hooks/useDate';
 
 import * as S from '../styles/global';
 
 const Welcome = () => {
-  const userName = useSelector(getUserName);
-
+  const {wish} = useDate();
   return (
     <>
-      <S.Header>Hi {userName} </S.Header>
-      <Link testID="stepsLink" to="/steps">
-        <S.Link testID="stepsLinkText">See your steps</S.Link>
-      </Link>
-      <Link testID="weaterLink" to="/weater">
-        <S.Link testID="weaterLinkText">See weater</S.Link>
+      <S.Header>{wish}</S.Header>
+      <Weather />
+      <StepsIfo />
+      <Link testID="rewardsLink" to="/rewards">
+        <S.Button testID="rewardsLinkText">Rewards</S.Button>
       </Link>
     </>
   );
