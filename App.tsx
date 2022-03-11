@@ -6,7 +6,7 @@ import InternetConnectionAlert from 'react-native-internet-connection-alert';
 import {NativeRouter, Route, Routes} from 'react-router-native';
 
 import Rewards from './components/Rewards';
-import WeaterInfo from './components/Weather';
+import WeatherInfo from './components/Weather';
 import Welcome from './components/Welcome';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserName} from './core/selectors/userSelectors';
@@ -65,7 +65,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="rewards" element={<Rewards />} />
-            <Route path="weater" element={<WeaterInfo />} />
+            <Route path="Weather" element={<WeatherInfo />} />
           </Routes>
         </Container>
       </NativeRouter>

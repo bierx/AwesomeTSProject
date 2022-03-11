@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {getWeaterData} from '../core/selectors/weaterSelector';
+import {getWeatherData} from '../core/selectors/weatherSelector';
 import {useSelector} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -45,7 +45,7 @@ const TextSecondary = styled(Text)`
 `;
 
 const WeatherDescription = () => {
-  const currentWeatherDetails = useSelector(getWeaterData);
+  const currentWeatherDetails = useSelector(getWeatherData);
   const unitsSystem = 'metric';
 
   if (!currentWeatherDetails) {

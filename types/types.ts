@@ -1,7 +1,7 @@
 import {
   stepsActionsTypes,
   userActionsTypes,
-  weaterActionsTypes,
+  weatherActionsTypes,
 } from '../core/actionTypes';
 
 export interface StepsStatePayload {
@@ -12,24 +12,24 @@ export interface UserStatePayload {
   name: string;
 }
 
-export interface WeaterStatePayload {
+export interface WeatherStatePayload {
   data: any;
   error?: any;
   isLoading: boolean;
 }
 
-export interface GetWeterData {
-  type: typeof weaterActionsTypes.GET_DATA;
+export interface GetWetherData {
+  type: typeof weatherActionsTypes.GET_DATA;
 }
 
-export interface SetWeterData {
-  type: typeof weaterActionsTypes.GET_DATA_SUCCESS;
-  payload: WeaterStatePayload;
+export interface SetWetherData {
+  type: typeof weatherActionsTypes.GET_DATA_SUCCESS;
+  payload: WeatherStatePayload;
 }
 
-export interface GetWeterDataError {
-  type: typeof weaterActionsTypes.GET_DATA_ERROR;
-  payload: WeaterStatePayload;
+export interface GetWetherDataError {
+  type: typeof weatherActionsTypes.GET_DATA_ERROR;
+  payload: WeatherStatePayload;
 }
 
 export interface ChangeCount {
@@ -44,10 +44,10 @@ export interface ChangeName {
 
 export type CountActions = ChangeCount;
 export type UserActions = ChangeName;
-export type WeaterActions = GetWeterData | SetWeterData | GetWeterDataError;
+export type WeatherActions = GetWetherData | SetWetherData | GetWetherDataError;
 
 export interface Store {
   steps: StepsStatePayload;
   user: UserStatePayload;
-  weater: WeaterStatePayload;
+  weather: WeatherStatePayload;
 }

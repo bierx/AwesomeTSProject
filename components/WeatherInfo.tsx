@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Text, View} from 'react-native';
 import styled from 'styled-components';
-import {getWeaterData} from '../core/selectors/weaterSelector';
+import {getWeatherData} from '../core/selectors/weatherSelector';
 import {useSelector} from 'react-redux';
 import {useDate} from '../hooks/useDate';
 interface CurrentWeatherProps {
@@ -27,7 +27,7 @@ const Time = styled(Text)`
 `;
 
 const CurrentWeather: FC<CurrentWeatherProps> = ({error}) => {
-  const currentWeatherDetails = useSelector(getWeaterData);
+  const currentWeatherDetails = useSelector(getWeatherData);
   const {fullTime} = useDate();
 
   if (error) {

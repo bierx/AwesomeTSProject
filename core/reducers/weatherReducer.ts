@@ -1,27 +1,27 @@
-import {weaterActionsTypes} from '../actionTypes';
-import {WeaterActions, WeaterStatePayload} from '../../types/types';
+import {weatherActionsTypes} from '../actionTypes';
+import {WeatherActions, WeatherStatePayload} from '../../types/types';
 
-const initialState: WeaterStatePayload = {
+const initialState: WeatherStatePayload = {
   data: null,
   isLoading: false,
 };
 
-const userReducer = (state = initialState, action: WeaterActions) => {
+const userReducer = (state = initialState, action: WeatherActions) => {
   switch (action.type) {
-    case weaterActionsTypes.GET_DATA:
+    case weatherActionsTypes.GET_DATA:
       return {
         ...state,
         error: null,
         isLoading: true,
       };
-    case weaterActionsTypes.GET_DATA_SUCCESS:
+    case weatherActionsTypes.GET_DATA_SUCCESS:
       return {
         ...state,
         error: null,
         data: action.payload,
         isLoading: false,
       };
-    case weaterActionsTypes.GET_DATA_ERROR:
+    case weatherActionsTypes.GET_DATA_ERROR:
       return {
         ...state,
         error: action.payload,
